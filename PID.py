@@ -238,7 +238,7 @@ def pid_control():
                     outer_is_right = True
 
                 # Left is outer, right is inner
-                if left_pwm_abs > right_pwm_abs:
+                else:
                     outer, inner = left_pwm_abs, right_pwm_abs
                     outer_speed, inner_speed = speed_left, speed_right
                     outer_is_right = False
@@ -524,3 +524,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
