@@ -212,11 +212,7 @@ def pid_control():
                 integral = 0
                 last_error = 0
                 target_left_pwm = left_pwm
-                target_right_pwm = right_pwm
-            # =========== END ===========
-            
-            else:
-                # Reset when stopped or turning
+                target_right_pwm = right_pwm# Reset when stopped or turning
                 d_left = left_count - prev_left_count
                 d_right = right_count - prev_right_count
 
@@ -275,14 +271,14 @@ def pid_control():
                         c = -turn_correction
                         target_left_pwm  = inc_mag(left_pwm,  c)
                         target_right_pwm = dec_mag(right_pwm, c)
-
-
-
-                # integral = 0
-                # last_error = 0
-                # reset_encoder()
-                # target_left_pwm = left_pwm
-                # target_right_pwm = right_pwm
+            # =========== END ===========
+            
+            else:
+                integral = 0
+                last_error = 0
+                reset_encoder()
+                target_left_pwm = left_pwm
+                target_right_pwm = right_pwm
         
         if use_ramping and use_PID:
             # PWM Ramping Logic
@@ -524,5 +520,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
