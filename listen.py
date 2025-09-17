@@ -203,17 +203,10 @@ def pid_control():
             # Written by: Isaac Goh     Date Modified: 17/09/2025
             # ========== START ==========
             elif current_movement == 'turn':
-                error = left_count - right_count
-                proportional = KP * error
-                integral += KI * error * dt
-                integral = max(-MAX_CORRECTION, min(integral, MAX_CORRECTION))  # Anti-windup
-                derivative = KD * (error - last_error) / dt if dt > 0 else 0
-                correction = proportional + integral + derivative
-                correction = max(-MAX_CORRECTION, min(correction, MAX_CORRECTION))
-                last_error = error
-
-                target_left_pwm = left_pwm - correction
-                target_right_pwm = right_pwm + correction
+                integral = 0
+                last_error = 0
+                target_left_pwm = left_pwm
+                target_right_pwm = right_pwm
             # =========== END ===========
             
             else:
