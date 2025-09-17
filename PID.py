@@ -243,7 +243,7 @@ def pid_control():
                     outer_speed, inner_speed = speed_left, speed_right
                     outer_is_right = False
                 
-                turning_ratio = outer / inner
+                turning_ratio = outer / (inner + 1e-5)
                 turn_error = outer_speed - turning_ratio * inner_speed
 
                 turn_proportional = KP * turn_error # P_out = Kp * error
@@ -524,4 +524,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
