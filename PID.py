@@ -242,10 +242,10 @@ def pid_control():
                 turning_ratio = outer / (inner + 1e-5)
                 turn_error = outer_speed - turning_ratio * inner_speed
 
-                turn_proportional = KP * turn_error # P_out = Kp * error
-                turn_integral += Ki * turn_error * dt # I_out = I_out + Ki * error * dt
+                turn_proportional = 0.23 * turn_error # P_out = Kp * error
+                turn_integral += 0 * turn_error * dt # I_out = I_out + Ki * error * dt
                 turn_integral = max(-MAX_CORRECTION, min(turn_integral, MAX_CORRECTION))  # Anti-windup
-                turn_derivative = KD * (turn_error - turn_last_error) / dt if dt > 0 else 0 # D_out = Kd * (error - last_error) / dt
+                turn_derivative = 0.000025 * (turn_error - turn_last_error) / dt if dt > 0 else 0 # D_out = Kd * (error - last_error) / dt
                 turn_correction = turn_proportional + turn_integral + turn_derivative
                 turn_correction = max(-MAX_CORRECTION, min(turn_correction, MAX_CORRECTION))
                 turn_last_error = turn_error
@@ -520,6 +520,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
